@@ -1,3 +1,14 @@
 apiVersion: v1
-entries: {}
-generated: "2022-04-13T16:58:47.2630822+02:00"
+entries:
+  flashingstation:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-14T10:07:46.9532454+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 23639e7fc764d0dfacece00c8f44cd3c71f7d37634c93a08f7cc61d32a35e5be
+    name: flashingstation
+    type: application
+    urls:
+    - flashingstation-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-04-14T10:07:46.9483877+02:00"
