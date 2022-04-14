@@ -11,8 +11,8 @@ image:
   tag: ""
 
 imagePullSecrets: []
-nameOverride: "flashingStationApp"
-fullnameOverride: "flashingStationChart"
+nameOverride: "flashingstation-app"
+fullnameOverride: "flashingstation-chart"
 
 serviceAccount:
   # Specifies whether a service account should be created
