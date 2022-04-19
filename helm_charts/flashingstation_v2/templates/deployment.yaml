@@ -58,7 +58,7 @@ spec:
           readOnlyRootFilesystem: false
           runAsNonRoot: false 
         image: "{{ .Values.chromiumImage.repository }}:{{ .Values.chromiumImage.tag }}"
-        imagePullPolicy: {{ .Values.chromiumImage.pullPolicy | quote }}
+        imagePullPolicy: {{ .Values.chromiumImage.pullPolicy }}
         stdin: true
         tty: true
         volumeMounts:
