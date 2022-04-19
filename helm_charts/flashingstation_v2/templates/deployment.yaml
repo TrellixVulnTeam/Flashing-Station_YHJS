@@ -29,51 +29,51 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-        - name: {{ template "flashingstation.fullname" . }}-chromium
-          command: ["/bin/sh"]
-          args: [ "-c", "/bin/sh /etc/chr/chr_kiosk.sh"]        
-          securityContext:    
-            allowPrivilegeEscalation: true
-            capabilities: {}
-            privileged: true
-            readOnlyRootFilesystem: false
-            runAsNonRoot: false 
-          image: "{{ .Values.chromiumImage.repository }}:{{ .Values.chromiumImage.tag }}"
-          imagePullPolicy: {{ .Values.chromiumImage.pullPolicy | quote }}
-          stdin: true
-          tty: true
-          volumeMounts:
-          - mountPath: /dev/input
-            name: myio      
-          - mountPath: /dev/tty
-            name: mytty   
-          - mountPath: /run/udev
-            name: vol1  
-          - name: configchr
-            mountPath: "/etc/chr/chr_kiosk.sh"
-            subPath: chr_kiosk.sh  
-          - name: configchr
-            mountPath: "/usr/share/X11/xorg.conf.d/chromium_xset.conf"
-            subPath: chromium_xset.conf
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+      - name: {{ template "flashingstation.fullname" . }}-chromium
+        command: ["/bin/sh"]
+        args: [ "-c", "/bin/sh /etc/chr/chr_kiosk.sh"]        
+        securityContext:    
+          allowPrivilegeEscalation: true
+          capabilities: {}
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false 
+        image: "{{ .Values.chromiumImage.repository }}:{{ .Values.chromiumImage.tag }}"
+        imagePullPolicy: {{ .Values.chromiumImage.pullPolicy | quote }}
+        stdin: true
+        tty: true
+        volumeMounts:
+        - mountPath: /dev/input
+          name: myio      
+        - mountPath: /dev/tty
+          name: mytty   
+        - mountPath: /run/udev
+          name: vol1  
+        - name: configchr
+          mountPath: "/etc/chr/chr_kiosk.sh"
+          subPath: chr_kiosk.sh  
+        - name: configchr
+          mountPath: "/usr/share/X11/xorg.conf.d/chromium_xset.conf"
+          subPath: chromium_xset.conf
         volumes: 
         - hostPath:
             path: /dev/tty
