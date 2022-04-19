@@ -11,8 +11,8 @@ image:
   tag: ""
     
 chromiumImage:
-  repository: ait-ma-k8s-project-docker-v.eu.artifactory.conti.de/qam/chromium-kiosk
-  tag: "1.0.0"
+  repository: chromium-kiosk #ait-ma-k8s-project-docker-v.eu.artifactory.conti.de/qam/chromium-kiosk
+  tag: latest #"1.0.0"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
