@@ -74,22 +74,22 @@ spec:
         - name: configchr
           mountPath: "/usr/share/X11/xorg.conf.d/chromium_xset.conf"
           subPath: chromium_xset.conf
-        volumes: 
-        - hostPath:
-            path: /dev/tty
-            type: ""
-          name: mytty    
-        - hostPath:
-            path: /dev/input
-            type: ""
-          name: myio   
-        - hostPath:
-            path: /run/udev
-            type: ""
-          name: vol1     
-        - name: configchr
-          configMap:
-            name: {{ template "flashingstation.fullname" . }}-chromiumconf 
+      volumes: 
+      - hostPath:
+          path: /dev/tty
+          type: ""
+        name: mytty    
+      - hostPath:
+          path: /dev/input
+          type: ""
+        name: myio   
+      - hostPath:
+          path: /run/udev
+          type: ""
+        name: vol1     
+      - name: configchr
+        configMap:
+          name: {{ template "flashingstation.fullname" . }}-chromiumconf 
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
