@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flashingstation.fullname" . }}
+  labels:
+    {{- include "flashingstation.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "flashingstation.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        checksum/config: 
+          {{ include (print $.Template.BasePath "/chromiumconf.yaml") . | sha256sum }}
+      {{- end }}
+      labels:
+        {{- include "flashingstation.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "flashingstation.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: {{ template "flashingstation.fullname" . }}-chromium
+          command: ["/bin/sh"]
+          args: [ "-c", "/bin/sh /etc/chr/chr_kiosk.sh"]        
+          securityContext:    
+            allowPrivilegeEscalation: true
+            capabilities: {}
+            privileged: true
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false 
+          image: "{{ .Values.chromiumImage.repository }}:{{ .Values.chromiumImage.tag }}"
+          imagePullPolicy: {{ .Values.chromiumImage.pullPolicy | quote }}
+          stdin: true
+          tty: true
+          volumeMounts:
+          - mountPath: /dev/input
+            name: myio      
+          - mountPath: /dev/tty
+            name: mytty   
+          - mountPath: /run/udev
+            name: vol1  
+          - name: configchr
+            mountPath: "/etc/chr/chr_kiosk.sh"
+            subPath: chr_kiosk.sh  
+          - name: configchr
+            mountPath: "/usr/share/X11/xorg.conf.d/chromium_xset.conf"
+            subPath: chromium_xset.conf
+        volumes: 
+        - hostPath:
+            path: /dev/tty
+            type: ""
+          name: mytty    
+        - hostPath:
+            path: /dev/input
+            type: ""
+          name: myio   
+        - hostPath:
+            path: /run/udev
+            type: ""
+          name: vol1     
+        - name: configchr
+          configMap:
+            name: {{ template "flashingstation.fullname" . }}-chromiumconf 
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ template "flashingstation.fullname" . }}-chromiumconf"
+  labels:
+    {{- include "flashingstation.labels" . | nindent 4 }}
+data:
+  chromium_xset.conf: |
+    Section "Monitor"
+      Identifier "LVDS0"
+      Option "DPMS" "false"
+    EndSection
+
+    Section "ServerLayout"
+      Identifier "ServerLayout0"
+      Option "StandbyTime" "0"
+      Option "SuspendTime" "0"
+      Option "OffTime"     "0"
+      Option "BlankTime"   "0"
+    EndSection    
+  
+  chr_kiosk.sh: |
+    #!/usr/bin/bash      
+    timeout 120 bash -c 'while ! timeout 1 bash -c "</dev/tcp/127.0.0.1/1880"; do sleep 2; done' || false
+    startx /usr/bin/nohup /usr/bin/chromium-browser --no-sandbox --window-position=0,0 --window-size=7000,7000 --start-fullscreen --kiosk --incognito --noerrdialogs --disable-translate --no-first-run --fast --ignore-certificate-errors --fast-start --disable-infobars --check-for-update-interval=31536000 --disable-features=TranslateUI --noerrors --test-type -nocursor http://{{ .Values.ingress.hostname }}
