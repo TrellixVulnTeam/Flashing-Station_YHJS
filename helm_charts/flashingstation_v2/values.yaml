@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: danielbautz/nginx-deployment #nginx
+  repository: danielbautz317/nginx-deployment #nginx
   #will only be pulled if not present on the machine
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
