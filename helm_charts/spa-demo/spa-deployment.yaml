@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spa-deployment
+      label-key: spa-deployment
   template:
     metadata:
       labels:
