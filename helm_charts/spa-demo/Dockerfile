@@ -4,8 +4,8 @@ WORKDIR /app
 COPY package*.json /app/
 RUN python --version
 USER root
-RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt update
+RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt install -y python3.8
 RUN python --version
 RUN npm config set python /usr/bin/python3.8
