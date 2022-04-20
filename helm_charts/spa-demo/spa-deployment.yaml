@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        label-key : spa-deployment  
+        label-key : spa-deployment
     spec:
       containers:
         - name: spa-demo-container
