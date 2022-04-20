@@ -1,0 +1,17 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: spa-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        label-key : label-value  
+    spec:
+      containers:
+        - name: spa-demo-container
+          image: danielbautz317/spa-demo:v1
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
