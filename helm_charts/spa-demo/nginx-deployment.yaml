@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spa-deployment
+  name: nginx-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      label-key: spa-deployment
+      label-key: nginx-deployment
   template:
     metadata:
       labels:
-        label-key : spa-deployment
+        label-key : nginx-deployment
     spec:
       containers:
-        - name: spa-demo-container
+        - name: nginx-angular-display
           image: danielbautz317/spa-demo:v1
           imagePullPolicy: Always
           ports:
@@ -21,7 +21,7 @@ spec:
           - name: http
             containerPort: 80
             #hostPort for usage of a static port to access the webserver
-            hostPort: 3235
+            hostPort: 31007
             protocol: TCP
           livenessProbe:
             httpGet:
