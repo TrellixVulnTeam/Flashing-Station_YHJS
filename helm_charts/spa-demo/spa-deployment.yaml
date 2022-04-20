@@ -21,7 +21,7 @@ spec:
           - name: http
             containerPort: 80
             #hostPort for usage of a static port to access the webserver
-            hostPort: 31008
+            hostPort: 3235
             protocol: TCP
           livenessProbe:
             httpGet:
