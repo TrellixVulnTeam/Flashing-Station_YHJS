@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service-label-key: spa-deployment 
+    label-key: spa-deployment 
   name: spa-demo-service-name
 spec:
   type: NodePort #ClusterIP
@@ -12,4 +12,4 @@ spec:
     protocol: TCP
     targetPort: http #newly added
   selector:
-    deployment-label-key: spa-deployment
+    label-key: spa-deployment
