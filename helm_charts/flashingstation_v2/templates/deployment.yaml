@@ -37,6 +37,7 @@ spec:
         ports:
           - name: http
             containerPort: 80
+            #hostPort for usage of a static port to access the webserver
             hostPort: 31007
             protocol: TCP
         livenessProbe:
@@ -49,9 +50,11 @@ spec:
             port: http
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
+      #chromium image section - run the bash script first    
       - name: {{ template "flashingstation.fullname" . }}-chromium
         command: ["/bin/sh"]
-        args: [ "-c", "/bin/sh /etc/chr/chr_kiosk.sh"]        
+        args: [ "-c", "/bin/sh /etc/chr/chr_kiosk.sh"]
+        #necessary because of root privilege needs        
         securityContext:    
           allowPrivilegeEscalation: true
           capabilities: {}
