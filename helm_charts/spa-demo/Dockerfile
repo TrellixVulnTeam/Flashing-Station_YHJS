@@ -1,14 +1,14 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:10.8.0 as build-stage
+FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json /app/
 RUN python --version
-USER root
-RUN apt update
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt install -y python3.8
-RUN python --version
-RUN npm config set python /usr/bin/python3.8
+#USER root
+#RUN apt update
+#RUN add-apt-repository ppa:deadsnakes/ppa
+#RUN apt install -y python3.8
+#RUN python --version
+#RUN npm config set python /usr/bin/python3.8
 RUN npm install
 COPY ./ /app/
 ARG configuration=production
