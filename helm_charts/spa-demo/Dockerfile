@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json /app/
 RUN python --version
 USER root
+RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt update
 RUN apt install -y python3.8
 RUN python --version
