@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json /app/
 RUN python --version
 RUN apt-get install python3.8
+RUN python --version
 RUN npm config set python /usr/bin/python3.8
 RUN npm install
 COPY ./ /app/
