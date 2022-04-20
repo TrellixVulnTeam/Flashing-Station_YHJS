@@ -17,4 +17,9 @@ spec:
           image: danielbautz317/spa-demo:v1
           imagePullPolicy: Always
           ports:
-          - containerPort: 80
+        #  - containerPort: 80
+          - name: http
+            containerPort: 80
+            #hostPort for usage of a static port to access the webserver
+            hostPort: 31007
+            protocol: TCP
