@@ -3,6 +3,7 @@ FROM node:10.8.0 as build-stage
 WORKDIR /app
 COPY package*.json /app/
 RUN python --version
+USER root
 RUN apt update
 RUN apt install -y python3.8
 RUN python --version
