@@ -2,7 +2,7 @@
 FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json /app/
-RUN python --version
+#RUN python --version
 #USER root
 #RUN apt update
 #RUN add-apt-repository ppa:deadsnakes/ppa
