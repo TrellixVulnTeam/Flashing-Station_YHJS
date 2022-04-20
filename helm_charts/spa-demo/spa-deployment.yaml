@@ -12,9 +12,14 @@ spec:
       selector:
         matchLabels:
           app: spa-deployment
-      containers:
-        - name: spa-demo-container
-          image: danielbautz317/spa-demo:v1
-          imagePullPolicy: Always
-          ports:
-          - containerPort: 80
+      template:
+        metadata:
+          labels:
+            app: spa-deployment
+        spec:
+          containers:
+            - name: spa-demo-container
+              image: danielbautz317/spa-demo:v1
+              imagePullPolicy: Always
+              ports:
+              - containerPort: 80
