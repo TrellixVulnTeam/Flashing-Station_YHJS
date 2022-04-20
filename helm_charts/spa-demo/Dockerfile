@@ -2,7 +2,7 @@
 FROM node:10.8.0 as build-stage
 WORKDIR /app
 COPY package*.json /app/
-RUN echo python version
+RUN python version
 RUN npm config set python /usr/bin/python3.8
 RUN npm install
 COPY ./ /app/
