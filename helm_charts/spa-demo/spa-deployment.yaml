@@ -4,22 +4,17 @@ metadata:
   name: spa-deployment
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: spa-deployment
   template:
     metadata:
       labels:
-        label-key : label-value  
+        label-key : spa-deployment  
     spec:
-      selector:
-        matchLabels:
-          app: spa-deployment
-      template:
-        metadata:
-          labels:
-            app: spa-deployment
-        spec:
-          containers:
-            - name: spa-demo-container
-              image: danielbautz317/spa-demo:v1
-              imagePullPolicy: Always
-              ports:
-              - containerPort: 80
+      containers:
+        - name: spa-demo-container
+          image: danielbautz317/spa-demo:v1
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
