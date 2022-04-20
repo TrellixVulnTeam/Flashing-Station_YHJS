@@ -23,3 +23,11 @@ spec:
             #hostPort for usage of a static port to access the webserver
             hostPort: 31008
             protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http

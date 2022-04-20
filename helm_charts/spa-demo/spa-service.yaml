@@ -5,10 +5,11 @@ metadata:
     service-label-key: spa-deployment 
   name: spa-demo-service-name
 spec:
-  type: ClusterIP
+  type: NodePort #ClusterIP
   ports:
   - name: spa-demo-port-name
     port: 80
     protocol: TCP
+    targetPort: http #newly added
   selector:
     deployment-label-key: spa-deployment
