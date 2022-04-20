@@ -5,12 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: danielbautz/nginx-deployment #nginx
+  #will only be pulled if not present on the machine
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v1"
     
 chromiumImage:
+  #replace with conti artifactory link once in factory network
   repository: danielbautz317/chromium-kiosk #ait-ma-k8s-project-docker-v.eu.artifactory.conti.de/qam/chromium-kiosk
   tag: latest #"1.0.0"
   pullPolicy: IfNotPresent
@@ -46,6 +48,7 @@ service:
   port: 80
 
 ingress:
+  #will be displayed on the chromium kiosk mode browser
   hostname: "192.168.178.61:31007" #"name-nodered.location.main.conti.de"
   enabled: false
   annotations: {}
