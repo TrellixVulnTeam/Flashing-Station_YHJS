@@ -3,7 +3,7 @@ FROM node:10.8.0 as build-stage
 WORKDIR /app
 COPY package*.json /app/
 RUN python --version
-RUN sudo apt install python3.8
+RUN apt-get install python3.8
 RUN npm config set python /usr/bin/python3.8
 RUN npm install
 COPY ./ /app/
