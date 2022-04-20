@@ -9,7 +9,9 @@ spec:
       labels:
         label-key : label-value  
     spec:
-      selector: {}
+      selector:
+        matchLabels:
+          app: spa-deployment
       containers:
         - name: spa-demo-container
           image: danielbautz317/spa-demo:v1
