@@ -1,0 +1,22 @@
+{
+    "todos": [
+        {
+            "label": "Wurst essen",
+            "status": "false",
+            "position": "1",
+            "id": 1
+        },
+        {
+            "label": "Rechnung erstellen",
+            "status": "false",
+            "position": "2",
+            "id": 2
+        },
+        {
+            "label": "Website erstellen",
+            "status": "false",
+            "position": "3",
+            "id": 3
+        }
+    ]
+}
