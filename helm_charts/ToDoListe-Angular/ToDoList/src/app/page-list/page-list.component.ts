@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { iif } from 'rxjs';
 import { Eventping } from '../_interface/eventping';
 import { ToDo } from '../_interface/todo';
-
+import { DataService } from '../_service/data.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-page-list',
   templateUrl: './page-list.component.html',
@@ -15,14 +16,32 @@ export class PageListComponent implements OnInit {
   public $toDos: ToDo[];
   public $toDosdone: ToDo[];
 
-  constructor() {
+  constructor(public _dataService: DataService) {
     this.toDoShow = true;
     this.toDoDoneShow = false;
     this.$toDos = [];
     this.$toDosdone = [];
+    this.loadData();
   }
 
   ngOnInit(): void {
+  }
+
+  public loadData(): void {
+    this.$toDos = [];
+    this.$toDosdone = [];
+    this._dataService.getToDo().subscribe((data: ToDo[]) => {
+      data.forEach((toDo: ToDo) => {
+        if (toDo.status === true) {
+          this.$toDosdone.push(toDo);
+        }
+        else {
+          this.$toDos.push(toDo)
+        }
+      })
+    }, error => {
+      console.log(`%cERROR: ${error.message}`, `color: red; font-size: 12px`)
+    })
   }
 
   public update(event: Eventping): void {
@@ -68,7 +87,12 @@ export class PageListComponent implements OnInit {
   }
   public create(event: ToDo): void {
     event.position = this.$toDos.length + 1;
-    this.$toDos.push(event);
+    this._dataService.postToDo(event).subscribe((data: ToDo) => {
+      console.log(`%cSUC: "${data.label}" wurde erfolgreich erstellt.`, `color:green`);
+      this.$toDos.push(data);
+    }, error => {
+      console.log("Error");
+    });
   }
 
 }
