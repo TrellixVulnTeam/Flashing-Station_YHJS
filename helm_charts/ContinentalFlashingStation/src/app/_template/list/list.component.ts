@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MDCDataTable} from '@material/data-table';
+import { MDCDataTable } from '@material/data-table'
 
-const dataTable = new MDCDataTable(document.querySelector('.mdc-data-table'));
 
 
 @Component({
@@ -10,8 +9,10 @@ const dataTable = new MDCDataTable(document.querySelector('.mdc-data-table'));
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-
-  constructor() { }
+ 
+  constructor() {
+    const dataTable = new MDCDataTable(document.querySelector('.mdc-data-table'));
+   }
 
   ngOnInit(): void {
   }
