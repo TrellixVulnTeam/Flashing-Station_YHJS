@@ -1,14 +1,14 @@
 {
   "todos": [
     {
-      "label": "Wurst essen123",
+      "label": "Wurst essen",
       "status": false,
       "position": "1",
       "id": 1
     },
     {
       "label": "Rechnung erstellen",
-      "status": false,
+      "status": true,
       "position": "2",
       "id": 2
     },
