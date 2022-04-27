@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "@conti/theme": "^9.0.4",
+    "@material/button": "^13.0.0",
+    "@material/checkbox": "^13.0.0",
     "@material/data-table": "^13.0.0",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.5.4",
