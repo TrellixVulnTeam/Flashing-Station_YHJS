@@ -5,8 +5,7 @@ import { ThemeModule } from '@conti/theme';
 import { AppComponent } from './app.component';
 import { PageviewComponent } from './pageview/pageview.component';
 import { HeaderComponent } from './_template/header/header.component';
-import { ButtonComponent } from './_template/button/button.component';
-import { ListComponent } from './_template/list/list.component';
+import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './_template/checkbox/checkbox.component';
 import { ProgressbarComponent } from './_template/progressbar/progressbar.component';
 
@@ -16,7 +15,6 @@ import { ProgressbarComponent } from './_template/progressbar/progressbar.compon
     PageviewComponent,
     HeaderComponent,
     ButtonComponent,
-    ListComponent,
     CheckboxComponent,
     ProgressbarComponent
   ],
