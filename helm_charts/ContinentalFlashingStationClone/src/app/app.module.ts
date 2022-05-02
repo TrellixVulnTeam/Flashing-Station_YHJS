@@ -9,7 +9,7 @@ import { ButtonComponent } from './button/button.component';
 import { CheckboxComponent } from './_template/checkbox/checkbox.component';
 import { ProgressbarComponent } from './_template/progressbar/progressbar.component';
 //Angular Material Modules
-import { MatDividerModule } from '@angular/material/divider';
+/* import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -26,7 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
-
+ */
 
 
 
@@ -41,7 +41,7 @@ import { MatListModule } from '@angular/material/list';
     ProgressbarComponent
   ],
   imports: [
-    ThemeModule,
+    ThemeModule/* ,
     MatButtonModule,
     MatCardModule,
     MatDividerModule,
@@ -58,7 +58,7 @@ import { MatListModule } from '@angular/material/list';
     MatProgressSpinnerModule,
     MatTreeModule,
     MatAutocompleteModule,
-    MatListModule
+    MatListModule */
     //BrowserModule
   ],
   providers: [],
