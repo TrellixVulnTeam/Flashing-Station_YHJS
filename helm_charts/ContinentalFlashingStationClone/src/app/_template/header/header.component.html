@@ -1,1 +1,59 @@
-<p>header works!</p>
+<div fxFill fxLayout="column">
+    <mat-toolbar class="mat-elevation-z1 toolbar">
+        <div class="branding">
+            <a [routerLink]=""  >
+                <img class="logo" alt="Continental Logo" src="" />
+            </a>
+            <a [routerLink]=""   
+                ><img class="logo-small" alt="Continental Logo" src="" />
+            </a>
+        </div>
+              <a class="logoText" [routerLink]=""   >
+            <span class="tenpixelpaddingleft widescreen mat-subtitle-1">Titel</span>
+        </a>
+        <a class="logoText" [routerLink]=""   >
+            <span class="tenpixelpaddingleft thinscreen mat-subtitle-1">Titelshort</span>
+        </a>
+  
+
+        <span class="spacer"></span>
+
+        <button mat-icon-button id="flag-outline" [matMenuTriggerFor]="langmenu">
+            <mat-icon></mat-icon>
+            Flagge
+        </button>
+        <mat-menu #langmenu>
+            <div>
+                <button mat-menu-item >Sprache</button>
+            </div>
+        </mat-menu>
+
+        <button mat-raised-button id="perm_identity" [matMenuTriggerFor]="menu">
+            <mat-icon></mat-icon>
+            User name
+        </button>
+        <mat-menu #menu>
+            <button mat-menu-item id="logout" >
+                Logout
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+
+    <div id="application-header">
+        <div fxLayoutAlign="start center" class="h-100">
+            <button mat-icon-button >
+                <mat-icon></mat-icon>
+            </button>
+            <div fxFlex="grow" fxLayoutAlign="space-between center" class="px-4">
+                <div fxLayout="column" class="pt-2">
+                    <span class="caption">Test</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div id="overall-layout" fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+</div>
