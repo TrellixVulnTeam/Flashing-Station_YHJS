@@ -19,13 +19,13 @@
     <div class="spandiv"><span>Select a boot-medium (SD-Card or USB-Stick).</span></div>
     <div class="spacer"></div>
     <div class="datapanel">
-        <mat-progress-bar #progress mode="determinate" value="40"></mat-progress-bar>
-        <div class="spacer"></div>
-        <div class="mat-h6">{{progress.value}}%</div>
+        <mat-progress-bar #progress mode="determinate" [value]="progressbarvalue"></mat-progress-bar>
+
+        <div class="mat-h6 progressbartext">{{progressbarvalue}}%</div>
     </div>
     <!--   fourth row    -->
     <div class="buttondiv">
-        <button mat-raised-button color="primary">Select a device</button>
+        <button mat-raised-button color="primary"(click)="selectDrive()">Select a device</button>
     </div>
     
     <div class="spacer"></div>
@@ -52,7 +52,7 @@
     </div>
     <div class="spacer"></div>
     <div class="buttondiv">
-        <button mat-raised-button>Start flashing</button>
+        <button mat-raised-button (click)="startFlashing()">Start flashing</button>
     </div>
     
 

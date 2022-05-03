@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QipcheckviewComponent } from 'src/app/_templates/qipcheckview/qipcheckview.component';
 
@@ -12,24 +12,36 @@ export class AddComponent implements OnInit {
   hostname: string;
   ipadress:string;
   form: any;
+  ipInvalid:boolean;
 
   constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<QipcheckviewComponent>,@Inject(MAT_DIALOG_DATA) data) 
   {
 
     this.hostname = data.hostname;
     this.ipadress = data.ipadress;
+    this.ipInvalid = false;
   } 
 
   ngOnInit(
   ): void {
+    const ipPattern = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     this.form = this.fb.group({
-      hostname: [this.hostname, []],
-      ipadress:[this.ipadress,[]]
+      hostname: [this.hostname, [Validators.required]],
+      ipadress:[this.ipadress,[Validators.required,Validators.pattern(ipPattern)]]
+
     });
+    
   }
 
   save() {
-    this.dialogRef.close(this.form.value);
+    this.ipInvalid=true;
+    console.log(this.form.valid);
+    const {value, valid} = this.form;
+    console.log({value,valid});
+    if(valid){
+        this.ipInvalid =false;
+        this.dialogRef.close(value);
+    }      
 }
 
 close() {

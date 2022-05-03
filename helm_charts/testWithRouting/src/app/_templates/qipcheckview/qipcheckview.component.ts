@@ -16,6 +16,7 @@ export class QipcheckviewComponent implements OnInit {
   description: string;
   device: Device;
   devices: Device[];
+  resultText:string;
 
   constructor(private dialog: MatDialog) {
     this.devices = [{ hostname: "test", ipadress: "123456" }, { hostname: "test2", ipadress: "lalalalal" }];
@@ -69,6 +70,7 @@ export class QipcheckviewComponent implements OnInit {
   }
   startQipCheck():void{
     console.log("QIP Check started.");
+    this.resultText = "Insert outcome of QIP-Check here";
   }
 
 }

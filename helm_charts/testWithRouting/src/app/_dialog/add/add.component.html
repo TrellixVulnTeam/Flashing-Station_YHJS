@@ -1,20 +1,23 @@
-
 <div mat-dialog-title class="mat-h6">Add a device</div>
 
 <mat-dialog-content [formGroup]="form">
-  
     <mat-form-field>
-        <input matInput
+        <input matInput 
                 placeholder="Hostname"
-               formControlName="hostname">
+               formControlName="hostname"
+               required>      
     </mat-form-field>
     <br>
     <mat-form-field>
         <input matInput
         placeholder="Ip-Adress"
-       formControlName="ipadress">
+       formControlName="ipadress"
+       required>
     </mat-form-field>
- 
+    <div *ngIf="ipInvalid" class="alert">
+        <p>Ip-adress is not valid!</p>
+    </div>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>

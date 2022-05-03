@@ -35,6 +35,14 @@
         grid-column: 3;
         border: 1px solid var(--panel-dark-background-color);
         margin: 5px;
+        mat-progress-bar{
+            max-width: 90%;
+            padding-left: 5%;
+            padding-top: 5px;
+        }
+        .progressbartext{
+            padding-top:10px;
+        }
     }
     .resultpanel{
         grid-row-start: 10;
@@ -44,10 +52,12 @@
         height: flex;
         margin:5px;
         height: 73vh;
+       
     }
     mat-list{
         text-align: left;
     }
+    
 
     
 }

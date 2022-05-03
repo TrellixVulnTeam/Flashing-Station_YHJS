@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor() { 
     this.opened = false;
-    this.startView = true;
+    this.startView = false;
   }
 
   ngOnInit(): void {
