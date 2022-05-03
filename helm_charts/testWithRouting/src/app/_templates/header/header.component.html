@@ -106,25 +106,27 @@
             mat-icon-button
             id="goAdmin"
         >
+        Settings
         </button>
         
     </ng-container>
 </mat-toolbar>
 
 <div class="sidenavContainer">
-    <mat-drawer-container [hasBackdrop]="true">
+    <mat-drawer-container [hasBackdrop]="false">
+        <!-- Sidenav Open state -->
         <mat-drawer class="sidenav" #drawer mode="side" [(opened)]="opened">
             <div class="height100">
                 <mat-grid-list class="gridList" [cols]="1" rowHeight="150px" style="float: left">
                     <mat-grid-tile>
-                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center" (click)="onSidenavClick($event)">
+                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center" (click)="setViewToQIP()">
                             <img class="placeholder" src="../../../assets/magik/icons/app-icon.svg" />
                             <br>
                             <span class="mat-h6">QIP Check</span>
                         </div>
                    </mat-grid-tile>
                    <mat-grid-tile>
-                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center"(click)="onSidenavClick($event)">
+                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center"(click)="setViewToFlash()">
                             <img class="placeholder" src="../../../assets/magik/icons/change-over.svg" />
                             <br>
                             <span class="mat-h6">Flash Device</span>
@@ -134,7 +136,7 @@
             </div>
             
         </mat-drawer>
-
+        <!-- Sidenav Closed state -->
         <mat-drawer-content>
             <div class="height100">
                 <button mat-flat-button class="sideBtn"(click)="sideNavToggle()">
@@ -142,7 +144,8 @@
                     <mat-icon *ngIf="drawer.opened" class="sideBtnIcon">chevron_left</mat-icon>
                 </button>
                 <div class="height100">
-                    <p> wo bin ich</p>
+                    <app-qipcheckview *ngIf="startView"></app-qipcheckview>
+                    <app-flashingview *ngIf="!startView"></app-flashingview>
                     <router-outlet></router-outlet>
                 </div>
             </div>

@@ -7,32 +7,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  drawerOpened: boolean;
   opened = false;
+  startView = true;
 
   constructor() { 
-    this.drawerOpened = false;
     this.opened = false;
+    this.startView = true;
   }
 
   ngOnInit(): void {
   }
 
-  public drawerClicked():void{
-    this.drawerOpened =! this.drawerOpened;
-  }
   public goToDashboard():void {
-    console.log("Dashboard clicked");
+    this.startView = true;
   }
 
   public logout():void{
     console.log("Logout/User Button clicked");
   }
+  
   sideNavToggle() {
     this.opened = !this.opened;
   }
-  onSidenavClick(event: any):void{
-    console.log(event);
-
+  public setViewToQIP():void{
+    this.startView = true;
+  }
+  public setViewToFlash():void{
+    this.startView = false;
   }
 }

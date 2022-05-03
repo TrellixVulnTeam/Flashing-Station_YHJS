@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,13 +25,25 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QipcheckviewComponent } from './_templates/qipcheckview/qipcheckview.component';
+import { FlashingviewComponent } from './_templates/flashingview/flashingview.component';
+import { AddComponent } from './_dialog/add/add.component';
+import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    QipcheckviewComponent,
+    FlashingviewComponent,
+    AddComponent,
+    ConfirmDeleteComponent
+
   ],
   imports: [
     BrowserModule,
@@ -56,7 +69,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatAutocompleteModule,
     MatListModule,
     MatGridListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

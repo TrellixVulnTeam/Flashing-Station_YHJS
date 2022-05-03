@@ -166,7 +166,8 @@ mat-toolbar {
 }
 
 mat-drawer-container {
-    height: calc(100%) !important;
+    //height: calc(100%) !important;
+    height: 100%;
     max-height: calc(100%);
 }
 
@@ -183,7 +184,7 @@ mat-drawer-container {
     background: var(--toolbar-color);
     border: none;
     position: relative;
-    width: 20px;
+    width: 20px;   
 }
 
 .sideBtnIcon {

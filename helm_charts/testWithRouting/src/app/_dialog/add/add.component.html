@@ -1,0 +1,23 @@
+
+<div mat-dialog-title class="mat-h6">Add a device</div>
+
+<mat-dialog-content [formGroup]="form">
+  
+    <mat-form-field>
+        <input matInput
+                placeholder="Hostname"
+               formControlName="hostname">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput
+        placeholder="Ip-Adress"
+       formControlName="ipadress">
+    </mat-form-field>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-dialog-close mat-raised-button (click)="close()">Close</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+</mat-dialog-actions>
