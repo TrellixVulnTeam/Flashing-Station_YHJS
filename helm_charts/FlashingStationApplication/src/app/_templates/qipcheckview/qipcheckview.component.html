@@ -1,0 +1,53 @@
+<div class="grid-container">
+    <!-- first row-->
+    <div class="headline">
+        <div class="mat-h6">QIP Options</div>
+    </div>
+    <div class="headline">
+        <div class="mat-h6">Device Data</div>
+    </div>
+    <!-- second row-->
+    <div class="spandiv"><span>Add a device with hostname and IP-adress to check if it is registered correclty in QIP.</span></div>
+    <div>
+        <button mat-raised-button>Select all</button>
+        <button mat-raised-button disabled="!{{deletePossible}}" color="warn"(click)="deleteDevice(device)">Delete selected</button>
+    </div>
+    
+    <div class="datapanel">
+        <mat-selection-list id="datapanel" (selectionChange)="onListSelectionChange($event)" role="list">
+            <mat-list-option *ngFor="let device of devices" color="primary" role="listitem" >
+                <h6 matLine>Hostname: {{device.hostname}}</h6>
+                <p matLine>IP-Adress: {{device.ipadress}}</p>
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+    <!--   third row    -->
+    <div></div>
+    <div class="buttondiv">
+        <button mat-raised-button color="primary" (click)="openAddDialog()" >Add a device</button>
+    </div>
+    
+    <!-- fourth row -->
+    <div class="spandiv"><span>Click on the button below to start the checking script and see, if the devices are registered correctly in QIP. If not, please contact your local IT-departement to register the devices properly. </span></div>
+
+    <!-- fifth row -->
+    <div class="buttondiv">
+        <button mat-raised-button (click)="startQipCheck()"> Start QIP Check</button>
+    </div>
+    <!-- sixth row-->
+    <div class="spandiv"><span>Result:</span></div>
+
+    <!-- seventh row  -->
+    <div class="resultpanel">
+        <div class="spacer"></div>
+        <span class="result">
+            {{resultText}}
+        </span> 
+    </div>
+    
+
+
+    
+
+    
+</div>

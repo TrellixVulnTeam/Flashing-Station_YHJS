@@ -1,0 +1,58 @@
+<div class="grid-container">
+
+    <!-- first row-->
+    <div class="headline">
+        <div class="mat-h6">Flashing Options</div>
+    </div>
+    <div class="headline">
+        <div class="mat-h6">Flashing Process</div>
+    </div>
+    <!-- second row-->
+
+    <!-- third row -->
+    <div class="spandiv"><span>Select a boot-medium (SD-Card or USB-Stick).</span></div>
+    <div class="datapanel">
+        <mat-progress-bar #progress mode="determinate" [value]="progressbarvalue"></mat-progress-bar>
+
+        <div class="mat-h6 progressbartext">{{progressbarvalue}}%</div>
+        <div class="bars"></div>
+    </div>
+    <!--   fourth row    -->
+    <div class="buttondiv">
+        <button mat-raised-button color="primary"(click)="selectDrive()">Select a device</button>
+    </div>
+    
+
+    <!-- fifth row -->
+    <div class="spandiv"><span>Select boot medium appearance</span></div>
+
+    <!-- sixth row -->
+    <div class="radiobuttondiv">
+        <mat-radio-group aria-label="Select an option" color="primary">
+            <mat-radio-button value="1" [checked]="true">USB</mat-radio-button>
+            <mat-radio-button value="2">SD-Card</mat-radio-button>
+          </mat-radio-group>
+    </div>
+
+    <!-- seventh row-->
+    <div class="spandiv"><span>Select network connectivity</span></div>
+
+    <!-- sixth row -->
+    <div class="radiobuttondiv">
+        <mat-radio-group aria-label="Select an option" color="primary">
+            <mat-radio-button value="1" >Wifi</mat-radio-button>
+            <mat-radio-button value="2" [checked]="true">Ethernet</mat-radio-button>
+          </mat-radio-group>
+    </div>
+
+    <div class="buttondiv">
+        <button mat-raised-button (click)="startFlashing()">Start flashing</button>
+    </div>
+    
+
+
+    
+
+    
+</div>
+

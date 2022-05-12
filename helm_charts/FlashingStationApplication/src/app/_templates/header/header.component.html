@@ -1,0 +1,80 @@
+<mat-toolbar class="mat-elevation-z2 toolbar">
+    <div class="branding">
+        <a [routerLink]="" (click)="goToDashboard()">
+            <img class="logo" alt="Continental Logo" src="../../../assets/images/Continental_logo.png" />
+        </a>
+        <a [routerLink]="" (click)="goToDashboard()"
+            ><img class="logo-small" alt="Continental Logo" src="../../../assets/images/Continental_circle_logo.png" />
+        </a>
+    </div>
+    <a class="logoText" [routerLink]="" (click)="goToDashboard()">
+        <span class="tenpixelpaddingleft widescreen mat-subtitle-1">Continental Flashing Station</span>
+    </a>
+    <a class="logoText" [routerLink]="" (click)="goToDashboard()">
+        <span class="tenpixelpaddingleft thinscreen mat-subtitle-1">Flashing Station</span>
+    </a>
+
+ 
+
+    <span class="spacer"></span>
+   
+    <button mat-icon-button id="flag-outline">
+        <mat-icon></mat-icon>
+    </button>
+    <mat-menu #langmenu>
+        <div>
+            <button mat-menu-item>Deutsch</button>
+        </div>
+    </mat-menu>
+
+    <button mat-raised-button id="perm_identity" [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+        Bautz, Daniel
+    </button>
+    <mat-menu #menu>
+        <button mat-menu-item id="logout" (click)="logout()">
+            Logout
+        </button>
+    </mat-menu>
+</mat-toolbar>
+
+<div class="sidenavContainer">
+    <mat-drawer-container [hasBackdrop]="true">
+        <!-- Sidenav Open state -->
+        <mat-drawer class="sidenav" #drawer mode="side" [(opened)]="opened">
+            <div class="height100">
+                <mat-grid-list class="gridList" [cols]="1" rowHeight="150px" style="float: left">
+                    <mat-grid-tile>
+                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center" (click)="setViewToQIP()">
+                            <img class="placeholder" src="../../../assets/magik/icons/app-icon.svg" />
+                            <br>
+                            <span class="mat-h6">QIP Check</span>
+                        </div>
+                   </mat-grid-tile>
+                   <mat-grid-tile>
+                        <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center"(click)="setViewToFlash()">
+                            <img class="placeholder" src="../../../assets/magik/icons/change-over.svg" />
+                            <br>
+                            <span class="mat-h6">Flash Device</span>
+                    </div>
+                   </mat-grid-tile>
+                </mat-grid-list>   
+            </div>
+            
+        </mat-drawer>
+        <!-- Sidenav Closed state -->
+        <mat-drawer-content>
+            <div class="height100">
+                <button mat-flat-button class="sideBtn"(click)="sideNavToggle()">
+                    <mat-icon *ngIf="!drawer.opened" class="sideBtnIcon">chevron_right</mat-icon>
+                    <mat-icon *ngIf="drawer.opened" class="sideBtnIcon">chevron_left</mat-icon>
+                </button>
+                <div class="height100">
+                    <app-qipcheckview *ngIf="startView"></app-qipcheckview>
+                    <app-flashingview *ngIf="!startView"></app-flashingview>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

@@ -1,0 +1,93 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    text-align: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    .headline{
+        border: 1px solid black;
+        padding: 10px;
+        background-color: var(--panel-dark-background-color);
+        text-align: left;
+        
+    }
+    .spacer{
+        height: 10px;
+        width:10px;
+    }
+    mat-raised-button{
+        margin:5px;
+    }
+    .spandiv{
+        padding: 10px;
+        font-weight: bold;
+    }
+    .radiobuttondiv{
+        mat-radio-button{
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+    }
+    .datapanel{
+        grid-row-start: 2;
+        grid-row-end: 11;
+        grid-column: 2;
+        border: 1px solid var(--panel-dark-background-color);
+        margin: 5px;
+        mat-progress-bar{
+            max-width: 90%;
+            padding-left: 5%;
+            padding-top: 5px;
+        }
+        .progressbartext{
+            padding-top:10px;
+        }
+        .bars{
+            width: 45px;
+            height:40px;
+            --c: linear-gradient(current-color 0 0);
+            background:
+                var(--c) 0% 100%,
+                var(--c) 50% 100%,
+                var(--c) 100% 100%;
+            background-size: 9px 100%;
+            background-repeat: no-repeat;
+            animation: bars ls infinite linear;
+        }
+        @keyframes bars {
+            20%{
+                background-size: 9px 60%, 9px 100%, 9px 100%;
+            }
+            40%{
+                background-size: 9px 80%, 9px 60%, 9px 100%;
+            }
+            60%{
+                background-size: 9px 100%, 9px 80%, 9px 60%;
+            }
+            80%{
+                background-size: 9px 100%, 9px 100%, 9px 80%;
+            }
+
+        }
+    }
+    .resultpanel{
+        grid-row-start: 10;
+        grid-row-end: 11;
+        grid-column: 1;
+        border: 1px solid var(--panel-dark-background-color);
+        height: flex;
+        margin:5px;
+        height: 73vh;
+       
+    }
+    mat-list{
+        text-align: left;
+    }
+    
+
+    
+}
