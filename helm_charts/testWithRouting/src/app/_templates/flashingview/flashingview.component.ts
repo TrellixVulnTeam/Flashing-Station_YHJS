@@ -28,8 +28,8 @@ export class FlashingviewComponent implements OnInit {
        return new Promise( resolve => setTimeout(resolve, ms) );
     }
 
-    selectDrive():void{
-      console.log("drive selected");
-    }
+  selectDrive(): void {
+    console.log("drive selected");
+  }
 
 }

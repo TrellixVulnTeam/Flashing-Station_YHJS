@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  opened = false;
-  startView = true;
+  opened:boolean;
+  startView:boolean;
 
   constructor() { 
     this.opened = false;
-    this.startView = false;
+    this.startView = true;
   }
 
   ngOnInit(): void {
@@ -31,8 +31,10 @@ export class HeaderComponent implements OnInit {
   }
   public setViewToQIP():void{
     this.startView = true;
+    this.opened = false;
   }
   public setViewToFlash():void{
     this.startView = false;
+    this.opened = false;
   }
 }
