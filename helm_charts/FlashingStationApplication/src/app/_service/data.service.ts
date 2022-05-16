@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Device } from '../_interface/device';
 import { Observable } from 'rxjs';
+
 // //MongoDb Setup
 // declare var require: any
 
@@ -101,64 +102,75 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
   //Json-Server-url
-  private serverUrl = 'http://localhost:3000'
-  //private mongoServerUrl ='http://localhost:27017'
+  //private serverUrl = 'http://localhost:3000'
+  private mongoServerUrl ='http://localhost:27017'
   constructor(
     private _http: HttpClient
   ) { }
   //Json-Server calls
    //Get
-  public getDevice():Observable<Device[]>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    };
-    return this._http.get<Device[]>(`${this.serverUrl}/devices`, httpOptions);
-  }
-  //Post
-  public postDevice(object: Device):Observable<Device>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    };
-    return this._http.post<Device>(`${this.serverUrl}/devices`,object, httpOptions);
-  }
-  //Delete
-  public deleteDevice(object: Device):Observable<Device>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    };
-    return this._http.delete<Device>(`${this.serverUrl}/devices/${object.id}`, httpOptions);
-  }
-  //Put
-  public putDevice(object: Device):Observable<Device>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-    };
-    return this._http.put<Device>(`${this.serverUrl}/devices/${object.id}`,object, httpOptions);
-  }
-
-
-
-  //MongoDb Calls
-  // public saveDevice(device: Device){
-  //   return this._http.post('http://localhost:8080/api/SaveDevice/', device);
+  // public getDevice():Observable<Device[]>{
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':'application/json'
+  //     })
+  //   };
+  //   return this._http.get<Device[]>(`${this.serverUrl}/devices`, httpOptions);
+  // }
+  // //Post
+  // public postDevice(object: Device):Observable<Device>{
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':'application/json'
+  //     })
+  //   };
+  //   return this._http.post<Device>(`${this.serverUrl}/devices`,object, httpOptions);
+  // }
+  // //Delete
+  // public deleteDevice(object: Device):Observable<Device>{
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':'application/json'
+  //     })
+  //   };
+  //   return this._http.delete<Device>(`${this.serverUrl}/devices/${object.id}`, httpOptions);
+  // }
+  // //Put
+  // public putDevice(object: Device):Observable<Device>{
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':'application/json'
+  //     })
+  //   };
+  //   return this._http.put<Device>(`${this.serverUrl}/devices/${object.id}`,object, httpOptions);
   // }
 
-  // public getDevice(){
-  //   return this._http.get('http://localhost:8080/api/getDevice/')
-  // }
 
-  // public deleteDevice(id){
-  //   return this._http.delete('http://localhost:8080/api/deleteDevice/'+id);
-  // }
 
-  
-  
+  //client sided MongoDb Calls
+  public saveDevice(device: Device){
+    console.log("device to safe:")
+    console.log(device)
+    device.mode = "Save"
+    return this._http.post('http://localhost:8080/api/SaveDevice/', device);
+  }
+
+  public getDevice(){
+    return this._http.get('http://localhost:8080/api/getDevice/')
+  }
+
+  public deleteDevice(id){
+    console.log("Id:"+id)
+    return this._http.delete(`http://localhost:8080/api/deleteDevice/${id}`);
+  }
+
+  public deleteAllDevices(devices: Device[]){
+    devices.forEach(device =>{
+      console.log(device._id)
+      this.deleteDevice(device._id);
+    })
+  }
 }
+
+  
+  

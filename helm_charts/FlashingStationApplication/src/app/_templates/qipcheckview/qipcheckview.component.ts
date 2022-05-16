@@ -60,10 +60,12 @@ export class QipcheckviewComponent implements OnInit {
     //this._dataService.getDevice().subscribe(data=>this.devices)
     //this.getDevicesFromCache();
       this._dataService.getDevice().subscribe((data: Device[]) => {
-         this.devices = data;
+        this.devices = data;
          console.log(this.devices)
+         console.log("data:")
+         console.log(data)
        },() => {
-         console.log(`%ERROR $(error.message)`)
+         console.log(`devices not loaded correctly from database`)
       })
 
   }
@@ -105,8 +107,9 @@ export class QipcheckviewComponent implements OnInit {
         if(data){
           //this.onSave(data);
           //this.addDeviceToCache(data);
-            this._dataService.postDevice(data).subscribe((data: Device)=> {
-              this.devices.push(data);
+          console.log(data)
+            this._dataService.saveDevice(data).subscribe((data: Device)=> {
+            this.loadData();
 
             }, error =>{
               console.log(`${error.message}`)
@@ -133,9 +136,6 @@ export class QipcheckviewComponent implements OnInit {
       id: 1,
       title: 'Delete-Dialog'
     };
-    this.selectedOptions.forEach(device =>{
-      console.log(device.hostname + device.ipadress);
-    })
     const dialogRef = this.dialog.open(ConfirmDeleteComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {
@@ -143,12 +143,14 @@ export class QipcheckviewComponent implements OnInit {
           console.log(data)
           this.selectedOptions.forEach(device => {
             //this.deleteDeviceFromCache(device);
-              this._dataService.deleteDevice(device).subscribe((data:Device)=>{
+            console.log(device)
+              this._dataService.deleteDevice(device._id).subscribe((data:Device)=>{
               }, error =>{
                 console.log(`${error.message}`)
               })
           })
-          this.devices = this.devices.filter(item => this.selectedOptions.indexOf(item) < 0);
+          this.loadData();
+          //this.devices = this.devices.filter(item => this.selectedOptions.indexOf(item) < 0);
           this.selectedOptions.forEach(device =>{
             console.log("Removing " +device.hostname + "from devices Array");
           })

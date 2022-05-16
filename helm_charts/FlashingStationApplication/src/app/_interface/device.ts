@@ -1,7 +1,7 @@
 
 
 export interface Device {
-    id:number;
+    _id:any;
     hostname: string;
     ipadress:string;
     mode?:string;

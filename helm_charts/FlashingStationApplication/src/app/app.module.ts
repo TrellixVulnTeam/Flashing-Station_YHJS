@@ -33,6 +33,7 @@ import { FlashingviewComponent } from './_templates/flashingview/flashingview.co
 import { AddComponent } from './_dialog/add/add.component';
 import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DataService } from './_service/data.service';
 
 
 
@@ -80,7 +81,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

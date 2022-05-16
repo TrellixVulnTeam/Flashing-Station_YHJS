@@ -16,7 +16,7 @@ export class AddComponent implements OnInit {
 
   constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<QipcheckviewComponent>,@Inject(MAT_DIALOG_DATA) data) 
   {
-
+    
     this.hostname = data.hostname;
     this.ipadress = data.ipadress;
     this.ipInvalid = false;
