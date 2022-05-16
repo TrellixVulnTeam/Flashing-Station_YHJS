@@ -8,14 +8,18 @@
     </div>
     <!-- second row-->
     <div class="spandiv"><span>Add a device with hostname and IP-adress to check if it is registered correclty in QIP.</span></div>
-    <div>
-        <button mat-raised-button>Select all</button>
-        <button mat-raised-button disabled="!{{deletePossible}}" color="warn"(click)="deleteDevice(device)">Delete selected</button>
+    <div class="selectionSection">       
+        <button mat-raised-button [disabled]="!deletePossible" color="warn"(click)="deleteDevice()">
+            <mat-icon>
+                delete
+            </mat-icon>
+        </button>
+        <mat-checkbox class="selectAll" [checked]="devices.length === selectedOptions.length && devices.length > 0" (change)="selectAllElements()"></mat-checkbox>
     </div>
     
     <div class="datapanel">
-        <mat-selection-list id="datapanel" (selectionChange)="onListSelectionChange($event)" role="list">
-            <mat-list-option *ngFor="let device of devices" color="primary" role="listitem" >
+        <mat-selection-list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)" role="list">
+            <mat-list-option *ngFor="let device of devices" color="primary" role="listitem" [value]="device" >
                 <h6 matLine>Hostname: {{device.hostname}}</h6>
                 <p matLine>IP-Adress: {{device.ipadress}}</p>
             </mat-list-option>

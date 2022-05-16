@@ -1,5 +1,8 @@
+
+
 export interface Device {
+    id:number;
     hostname: string;
     ipadress:string;
-    status?:boolean;
+    mode?:string;
 }

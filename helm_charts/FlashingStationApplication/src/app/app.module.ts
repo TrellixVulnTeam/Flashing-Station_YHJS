@@ -25,13 +25,15 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatProgressBarModule} from '@angular/material/progress-bar'
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QipcheckviewComponent } from './_templates/qipcheckview/qipcheckview.component';
 import { FlashingviewComponent } from './_templates/flashingview/flashingview.component';
 import { AddComponent } from './_dialog/add/add.component';
 import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 
 
 
@@ -73,7 +75,10 @@ import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.
     MatRadioModule,
     MatProgressBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
