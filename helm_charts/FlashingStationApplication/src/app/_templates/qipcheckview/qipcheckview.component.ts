@@ -46,7 +46,7 @@ export class QipcheckviewComponent implements OnInit {
   description: string;
   device: Device;
   devices: Device[]=[];
-  resultText:string;
+  resultText:string[];
   deletePossible:boolean =false;
   selectedOptions:Device[]=[];
 
@@ -67,8 +67,8 @@ export class QipcheckviewComponent implements OnInit {
        },() => {
          console.log(`devices not loaded correctly from database`)
       })
-
   }
+
   onNgModelChange($event: any) {
    console.log(this.selectedOptions)
    console.log($event)
@@ -109,6 +109,7 @@ export class QipcheckviewComponent implements OnInit {
           //this.addDeviceToCache(data);
           console.log(data)
             this._dataService.saveDevice(data).subscribe((data: Device)=> {
+
             this.loadData();
 
             }, error =>{
@@ -145,11 +146,13 @@ export class QipcheckviewComponent implements OnInit {
             //this.deleteDeviceFromCache(device);
             console.log(device)
               this._dataService.deleteDevice(device._id).subscribe((data:Device)=>{
+                console.log(data)
               }, error =>{
                 console.log(`${error.message}`)
               })
           })
           this.loadData();
+          window.location.reload();
           //this.devices = this.devices.filter(item => this.selectedOptions.indexOf(item) < 0);
           this.selectedOptions.forEach(device =>{
             console.log("Removing " +device.hostname + "from devices Array");
@@ -165,8 +168,19 @@ export class QipcheckviewComponent implements OnInit {
 
   startQipCheck():void{
     console.log("QIP Check started.");
-    this.resultText="";
-    this.devices.forEach((device) => {this.resultText = this.resultText + "Hostname: " + device.hostname + "  Ip-Adress: "+ device.ipadress + '\r\n';})
+    var unformattedText:string;
+    this.resultText=[];
+    this._dataService.checkDevicesFromQip().subscribe((data:string)=> {
+      console.log(JSON.parse(data))
+      unformattedText = JSON.parse(data)
+      this.resultText = unformattedText.split("\n")
+      //console.log(splittedResult)
+      //this.resultText = unformattedText
+           
+
+            }, error =>{
+              console.log(`${error.message}`)
+            })
   }
   selectAllElements():void{
     if(this.selectedOptions.length != this.devices.length){

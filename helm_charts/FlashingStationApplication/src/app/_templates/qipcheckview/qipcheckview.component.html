@@ -9,14 +9,15 @@
     <!-- second row-->
     <div class="spandiv"><span>Add a device with hostname and IP-adress to check if it is registered correclty in QIP.</span></div>
     <div class="selectionSection">       
-        <button mat-raised-button [disabled]="!deletePossible" color="warn"(click)="deleteDevice()">
+        <button  mat-raised-button [disabled]="!deletePossible" color="warn"(click)="deleteDevice()">
             <mat-icon>
                 delete
             </mat-icon>
         </button>
         <mat-checkbox class="selectAll" [checked]="devices.length === selectedOptions.length && devices.length > 0" (change)="selectAllElements()"></mat-checkbox>
     </div>
-    
+    <!-- third row -->
+   
     <div class="datapanel">
         <mat-selection-list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)" role="list">
             <mat-list-option *ngFor="let device of devices" color="primary" role="listitem" [value]="device" >
@@ -25,28 +26,32 @@
             </mat-list-option>
         </mat-selection-list>
     </div>
-    <!--   third row    -->
-    <div></div>
+    <!--   fourth row    -->
+    
     <div class="buttondiv">
-        <button mat-raised-button color="primary" (click)="openAddDialog()" >Add a device</button>
+        <button class="btn" mat-raised-button color="primary" (click)="openAddDialog()" >
+            <p>Add a device</p>
+        </button>
     </div>
     
-    <!-- fourth row -->
+    <!-- fifth row -->
     <div class="spandiv"><span>Click on the button below to start the checking script and see, if the devices are registered correctly in QIP. If not, please contact your local IT-departement to register the devices properly. </span></div>
 
-    <!-- fifth row -->
+    <!-- sixth row -->
     <div class="buttondiv">
-        <button mat-raised-button (click)="startQipCheck()"> Start QIP Check</button>
+        <button class="btn" mat-raised-button (click)="startQipCheck()"> <p>Start QIP Check</p></button>
     </div>
-    <!-- sixth row-->
+    <!-- seventh row-->
     <div class="spandiv"><span>Result:</span></div>
 
-    <!-- seventh row  -->
+    <!-- eigth row  -->
     <div class="resultpanel">
         <div class="spacer"></div>
-        <span class="result">
-            {{resultText}}
-        </span> 
+        <mat-list class="result">
+            <mat-list-item *ngFor="let result of resultText" role="listitem" >
+                <p class = "listtext">{{result}}</p>
+            </mat-list-item>
+        </mat-list>  
     </div>
     
 

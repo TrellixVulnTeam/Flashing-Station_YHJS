@@ -164,12 +164,14 @@ export class DataService {
     return this._http.delete(`http://localhost:8080/api/deleteDevice/${id}`);
   }
 
-  public deleteAllDevices(devices: Device[]){
-    devices.forEach(device =>{
-      console.log(device._id)
-      this.deleteDevice(device._id);
-    })
+  public deleteAllDevices(){
+    return this._http.delete("http://localhost:8080/api/deleteDevices");
   }
+
+  public checkDevicesFromQip(){
+    return this._http.get('http://localhost:8080/api/checkDevicesInQip/')
+  }
+  
 }
 
   

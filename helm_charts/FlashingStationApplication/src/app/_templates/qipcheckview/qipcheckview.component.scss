@@ -1,8 +1,9 @@
 .grid-container{
     display: grid;
     grid-template-columns: 30% 70%;
-    grid-template-rows: auto auto auto auto auto auto auto auto;
+    grid-template-rows: 5% 5% 5% 10% 6% 3% auto;
     text-align: center;
+    height: 100%;
     row-gap: 10px;
     column-gap:10px;
     padding-right: 10px;
@@ -14,17 +15,31 @@
         background-color: var(--panel-dark-background-color);
         text-align: left;
         
+        .mat-h6{
+            font-size: 2.5vmin !important;
+        }
+        
+    
+        
+        
+    }
+
+    .buttondiv{
+        .btn p{
+            font-size: 1.5vmin !important;
+            max-height: calc(font-size*2+1) !important;
+        }
+        padding-bottom: 5px;
     }
     .spacer{
         height: 10px;
         width:10px;
     }
-    mat-raised-button{
-        margin:5px;
-    }
+
     .spandiv{
         padding: 10px;
         font-weight: bold;
+        font-size: 1.5vmin !important;
     }
     .selectionSection{
         text-align: right;
@@ -35,32 +50,40 @@
         }
       
     }
+   
     .datapanel{
         grid-row-start: 3;
-        grid-row-end: 9;
+        grid-row-end: 8;
         grid-column: 2;
         border: 1px solid var(--panel-dark-background-color);
         margin: 5px;
         overflow: scroll;
-        height: 67em;
+        min-height: 95%;
+        //height: 85vh;
+        mat-selection-list{
+            mat-list-option h6,p{
+                font-size: 2vmin !important;
+            }
+        }
     }
     .resultpanel{
-        grid-row-start: 8;
-        grid-row-end: 8;
-        grid-column: 1;
         border: 1px solid var(--panel-dark-background-color);
-        height: flex;
         margin:5px;
-        height: 50em;
+        min-height: 95%;
+        //height: 65vh;
+        .result{
+            font-style: italic;
+            break-after: always;
+        }
+        .listtext{
+            font-size: 1.5vmin;
+            margin-bottom: 5px !important;
+        }
     }
     mat-list{
         text-align: left;
     }
-    .result{
-        font-style: italic;
-        break-after: always;
-        
-    }
+   
 
    
 }

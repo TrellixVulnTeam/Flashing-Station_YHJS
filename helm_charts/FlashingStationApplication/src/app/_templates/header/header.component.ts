@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit {
 
   public logout():void{
     console.log("Logout/User Button clicked");
+    this._dataService.deleteAllDevices().subscribe((data:Device[])=>{
+    }, error =>{
+      console.log(`${error.message}`)
+    });
   }
   
   sideNavToggle() {

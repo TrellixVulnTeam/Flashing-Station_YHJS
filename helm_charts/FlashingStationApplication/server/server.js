@@ -5,6 +5,13 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongo = require('mongoose');
 
+//qip-Check-related variables
+const dns = require('dns');
+const dnsPromises = dns.promises;
+const fs = require('fs');
+const { async } = require('rxjs/internal/scheduler/async');
+const { json } = require('express/lib/response');
+
 //Connection to MongoDb
 var db = mongo.connect("mongodb://localhost:27017/devices", function(err,response){
   if(err)
@@ -40,16 +47,47 @@ var DevicesSchema = new Schema({
 var model = mongo.model('devices', DevicesSchema, 'devices');
 
 app.get('/api/getDevice', function(req,res){
-  model.find({},function(err,data){
+  model.find({},async (err,data) =>{
     if(err){
       res.send(err);
     }
     else{
-      res.send(data);
+      await res.send(data);
       console.log("lala"+data)
     }
   });
 })
+
+
+  app.get('/api/checkDevicesInQip', async function (req,res){
+    model.find({},  async function (err,data)  {
+      if(err){
+        res.send(err);
+      }
+      else{
+        
+        console.log(data)
+        var result = "";
+        for(const device of data){
+          var host = await dnsPromises.reverse(device.ipadress);
+          if (host.toString() == device.hostname){
+            //result = result + {"hostname":device.hostname, "ipadress":device.ipadress, "message": "registered correctly"}
+            result = result + "Device " + device.hostname + " has been registered correctly in QIP." +"\n"
+            //JSON.stringify({ message: result })
+          }
+          else{
+            //result = result + {"hostname":device.hostname, "ipadress":device.ipadress, "message": "NOT registered correctly"}
+            result = result + "Device " + device.hostname + " has NOT been registered correctly in QIP." +"\n"
+            //JSON.stringify({ message: result })
+          }
+        }
+
+        res.send(JSON.stringify(JSON.stringify(result)))
+      }
+    });
+  })
+
+
 
 
 app.post('/api/SaveDevice', function(req,res){
@@ -98,6 +136,26 @@ app.delete('/api/deleteDevice/:id', function(req,res){
     }
   });
 });
+app.delete('/api/deleteDevices', function(req,res){
+  mongo.connection.collections['devices'].drop(function(err){
+    if(err){
+      console.log(err);
+      res.send(err);
+    }
+    else{
+      res.send({data:'Records have been deleted!'})
+    }
+  })
+  // model.remove({}, function(err){
+  //   if(err){
+  //     console.log(err);
+  //     res.send(err);
+  //   }
+  //   else{
+  //     res.send({data:'Records have been deleted!'})
+  //   }
+  // });
+})
 
 
 
