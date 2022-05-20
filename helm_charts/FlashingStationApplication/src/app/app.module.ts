@@ -34,6 +34,7 @@ import { AddComponent } from './_dialog/add/add.component';
 import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataService } from './_service/data.service';
+import { CheckForNewVersionComponent } from './_dialog/check-for-new-version/check-for-new-version.component';
 
 
 
@@ -45,7 +46,8 @@ import { DataService } from './_service/data.service';
     QipcheckviewComponent,
     FlashingviewComponent,
     AddComponent,
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    CheckForNewVersionComponent
 
   ],
   imports: [

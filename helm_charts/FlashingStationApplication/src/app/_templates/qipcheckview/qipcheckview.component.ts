@@ -59,8 +59,8 @@ export class QipcheckviewComponent implements OnInit {
     
     //this._dataService.getDevice().subscribe(data=>this.devices)
     //this.getDevicesFromCache();
-      this._dataService.getDevice().subscribe((data: Device[]) => {
-        this.devices = data;
+      this._dataService.getDevice().subscribe(async (data: Device[]) => {
+         this.devices = await data;
          console.log(this.devices)
          console.log("data:")
          console.log(data)
@@ -109,7 +109,7 @@ export class QipcheckviewComponent implements OnInit {
           //this.addDeviceToCache(data);
           console.log(data)
             this._dataService.saveDevice(data).subscribe((data: Device)=> {
-
+            console.log("Device added")
             this.loadData();
 
             }, error =>{
@@ -147,12 +147,12 @@ export class QipcheckviewComponent implements OnInit {
             console.log(device)
               this._dataService.deleteDevice(device._id).subscribe((data:Device)=>{
                 console.log(data)
+                this.loadData();
               }, error =>{
                 console.log(`${error.message}`)
               })
           })
-          this.loadData();
-          window.location.reload();
+          
           //this.devices = this.devices.filter(item => this.selectedOptions.indexOf(item) < 0);
           this.selectedOptions.forEach(device =>{
             console.log("Removing " +device.hostname + "from devices Array");
@@ -174,6 +174,9 @@ export class QipcheckviewComponent implements OnInit {
       console.log(JSON.parse(data))
       unformattedText = JSON.parse(data)
       this.resultText = unformattedText.split("\n")
+       if(this.resultText.length == 1){
+         this.resultText[0] = "No devices added."
+       }
       //console.log(splittedResult)
       //this.resultText = unformattedText
            
@@ -182,6 +185,7 @@ export class QipcheckviewComponent implements OnInit {
               console.log(`${error.message}`)
             })
   }
+
   selectAllElements():void{
     if(this.selectedOptions.length != this.devices.length){
       this.selectedOptions = this.devices;

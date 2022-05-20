@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { QipcheckviewComponent } from '../qipcheckview/qipcheckview.component';
 import { Device } from 'src/app/_interface/device';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CheckForNewVersionComponent } from 'src/app/_dialog/check-for-new-version/check-for-new-version.component';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +16,18 @@ export class HeaderComponent implements OnInit {
   startView:boolean;
   devices: Device[] = [];
 
-  constructor(public _dataService:DataService) { 
+  constructor(public _dataService:DataService, private dialog: MatDialog) { 
     this.opened = false;
     this.startView = true;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      title: 'CheckForNewVersion-Dialog'
+    };
+   this.dialog.open(CheckForNewVersionComponent, dialogConfig);
+   
   }
 
   ngOnInit(): void {

@@ -171,7 +171,21 @@ export class DataService {
   public checkDevicesFromQip(){
     return this._http.get('http://localhost:8080/api/checkDevicesInQip/')
   }
+
+  public getNewestImagename(){
+    return this._http.get('http://localhost:8080/api/getNewestImagename')
+  }
+  public getCurrentImagename(){
+    return this._http.get('http://localhost:8080/api/getCurrentImagename')
+  }
   
+  public getNewestImage(imagename){
+    return this._http.get(`http://localhost:8080/api/getNewestImage/${imagename}`)
+  }
+
+  public deleteOldImage(oldImage){
+    return this._http.get(`http://localhost:8080/api/deleteOldImage/${oldImage}`)
+  }
 }
 
   

@@ -7,7 +7,7 @@
         <div class="mat-h6">Device Data</div>
     </div>
     <!-- second row-->
-    <div class="spandiv"><span>Add a device with hostname and IP-adress to check if it is registered correclty in QIP.</span></div>
+    <div class="divspanwithtext"><span>Add a device with hostname and IP-adress to check if it is registered correclty in QIP.</span></div>
     <div class="selectionSection">       
         <button  mat-raised-button [disabled]="!deletePossible" color="warn"(click)="deleteDevice()">
             <mat-icon>
@@ -30,26 +30,27 @@
     
     <div class="buttondiv">
         <button class="btn" mat-raised-button color="primary" (click)="openAddDialog()" >
-            <p>Add a device</p>
+            Add a device
         </button>
     </div>
     
     <!-- fifth row -->
-    <div class="spandiv"><span>Click on the button below to start the checking script and see, if the devices are registered correctly in QIP. If not, please contact your local IT-departement to register the devices properly. </span></div>
+   
+    <div class="divspanwithtext"><label>Click on the button below to start the checking script and see, if the devices are registered correctly in QIP. If not, please contact your local IT-departement to register the devices properly. </label></div>
 
     <!-- sixth row -->
     <div class="buttondiv">
-        <button class="btn" mat-raised-button (click)="startQipCheck()"> <p>Start QIP Check</p></button>
+        <button class="btn" mat-raised-button (click)="startQipCheck()"> Start QIP Check</button>
     </div>
     <!-- seventh row-->
-    <div class="spandiv"><span>Result:</span></div>
+    <div class="divspanwithtext"><span>Result:</span></div>
 
     <!-- eigth row  -->
     <div class="resultpanel">
         <div class="spacer"></div>
         <mat-list class="result">
             <mat-list-item *ngFor="let result of resultText" role="listitem" >
-                <p class = "listtext">{{result}}</p>
+                <div class = "listtext">{{result}}</div>
             </mat-list-item>
         </mat-list>  
     </div>

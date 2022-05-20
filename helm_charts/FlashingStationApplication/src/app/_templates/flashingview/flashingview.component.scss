@@ -1,31 +1,103 @@
 .grid-container{
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: auto auto auto auto auto auto auto;
     text-align: center;
     column-gap: 10px;
     row-gap: 10px;
     padding-right: 10px;
     padding-top: 10px;
+    @media (max-width: 560px) {
+        .headline{
+            border: 1px solid black;
+            padding-top: 1vh;
+            padding-left:1vh;
+         
+            height: 3vh;
+            background-color: var(--panel-dark-background-color);
+            text-align: left;
+            
+            .mat-h6{
+                font-size: 1.5vh !important;
+            }  
+        }
+        .buttondiv{
+            button{
+                
+                font-size: 1vh !important;
+                float: inline-start;
+            }
+            padding-bottom: 1vh;
+        }
+        .spacer{
+            height: 1vw;
+            width:1vw;
+        }
+    
+        .divspanwithtext{
+            float: inherit;
+            padding-bottom: 0vh;
+            margin-bottom: 0vh;
+            font-weight: bold;
+            font-size: 1vh !important;
+            min-width: 150px;
+            max-width:150px;
+            place-self: center;
+        }
+    }
+    @media (min-width: 561px) {
+        .headline{
+            border: 1px solid black;
+            padding-top: 1vh;
+            padding-left:1vh;
+         
+            height: 3vh;
+            background-color: var(--panel-dark-background-color);
+            text-align: left;
+            
+            
+            .mat-h6{
+                font-size: 2.5vh !important;
+                @media (max-width:830px) {
+                    font-size: 2.0vh !important;
+                }
+            }
+        }
+    
+        .buttondiv{
+            float: inherit;
+            button{
+                font-size: 1vh !important;
+                
+            }
+            padding-bottom: 1vh;
+        }
+        .spacer{
+            height: 1vh;
+            width:1vh;
+        }
+    
+        .divspanwithtext{
+            float: inherit;
+            padding-bottom: 0vh;
+            padding-top: 0vh;
+            vertical-align: middle;
+            margin-bottom: 0vh;
+            font-weight: bold;
+            font-size: 1.5vh !important;
+            min-width: 300px;
+            max-width: 300px;
+            place-self: center;
+            @media (max-width:830px) {
+                min-width: 200px;
+                max-width: 200px;
+                font-size: 1.2vh !important;
+            }
+            
+        }
 
-    .headline{
-        border: 1px solid black;
-        padding: 10px;
-        background-color: var(--panel-dark-background-color);
-        text-align: left;
-        
     }
-    .spacer{
-        height: 10px;
-        width:10px;
-    }
-    mat-raised-button{
-        margin:5px;
-    }
-    .spandiv{
-        padding: 10px;
-        font-weight: bold;
-    }
+
     .radiobuttondiv{
         mat-radio-button{
             padding-left: 10px;
