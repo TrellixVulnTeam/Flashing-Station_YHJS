@@ -31,20 +31,22 @@ export class CheckForNewVersionComponent implements OnInit {
       if(this.currentImage != this.newestImage){
         this.updateInProgress=true;
       //if(false){
-        this._dataService.getNewestImage(this.newestImage).subscribe((data: string) => {
-          this._dataService.deleteOldImage(this.currentImage).subscribe(async (data:boolean) =>{
+        this._dataService.getNewestImage(this.newestImage).subscribe(async (data: string) => {
+          if (this.currentImage.length != 0) {
+            this._dataService.deleteOldImage(this.currentImage).subscribe(async (data: boolean) => {
+              this.finished = true;
+              await this.sleep(500);
+              this.close();
+            }, () => {
+              console.log('error in deleting')
+            });
+          }
+          else{
             this.finished = true;
-            await this.sleep(500);
-            this.close();
-          },()=>{
-            console.log('error in deleting')
-          });  
-          },(e) => {
-            
-            
-            console.log(`error in fetching`)
-            console.log(e)
-          }) 
+            await this.sleep(1000);
+            this.close()
+          }
+        })
       }
       else{
         

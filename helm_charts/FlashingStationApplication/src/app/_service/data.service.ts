@@ -184,7 +184,7 @@ export class DataService {
   }
 
   public deleteOldImage(oldImage){
-    return this._http.get(`http://localhost:8080/api/deleteOldImage/${oldImage}`)
+    return this._http.delete(`http://localhost:8080/api/deleteOldImage/${oldImage}`)
   }
 }
 

@@ -9,7 +9,7 @@
     padding-right: 1vh;
     padding-top: 1vh;
     @media (max-width: 560px) {
-        
+     
         .headline{
             border: 1px solid black;
             padding-top: 1vh;
@@ -182,6 +182,13 @@
         text-align: left;
     }
    
-
+    .btn{
+        @media (max-width: 560px) {
+            font-size: 200px !important;
+        }
+        @media (min-width: 561px) {
+            font-weight: 200;
+        }
+    }
    
 }

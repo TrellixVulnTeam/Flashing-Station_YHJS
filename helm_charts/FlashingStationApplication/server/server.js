@@ -258,6 +258,7 @@ app.get('/api/getNewestImagename', async function (req, res) {
 import exec from 'child_process'
 import { errorMonitor } from 'node:events'
 
+//check current image name on device
 app.get('/api/getCurrentImagename', async function (req, res) {
   try{
     console.log("getCurrentImagename runs")
@@ -270,7 +271,8 @@ app.get('/api/getCurrentImagename', async function (req, res) {
   }
 })
 
-app.get('/api/deleteOldImage/:oldImage', async function (req, res) {
+//delete old image on device
+app.delete('/api/deleteOldImage/:oldImage', async function (req, res) {
   try{
     console.log("deleteOldImage runs")
     console.log(req.params.oldImage)
@@ -289,7 +291,7 @@ app.get('/api/deleteOldImage/:oldImage', async function (req, res) {
 
 //var exec = require("child_process");
 
-
+//fetch newest Image from Artifactory
 app.get('/api/getNewestImage/:imagename', async function (req, res) {
   try{
     console.log(req.params.imagename)
@@ -322,15 +324,26 @@ app.get('/api/getNewestImage/:imagename', async function (req, res) {
         console.log('exec error:' + error);
       }
     })
-
-
-    
   }
   catch (e){
     console.log("Pull from Artifactory failed!")
     console.log(e)
   }
 })
+
+
+//get all mounted devices on device
+app.get('/api/checkMountedDevices', async function (req, res) {
+  try{
+    res.send(true)
+  }
+  catch (e){
+    console.log("Checking for mounted devices failed")
+    console.log(e)
+    res.send(false)
+  }
+})
+
 
 //configure port
 app.listen(8080, function(){
