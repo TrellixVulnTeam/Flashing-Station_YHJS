@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +35,8 @@ import { ConfirmDeleteComponent } from './_dialog/confirm-delete/confirm-delete.
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DataService } from './_service/data.service';
 import { CheckForNewVersionComponent } from './_dialog/check-for-new-version/check-for-new-version.component';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { initializer } from './_utils/app-init';
 
 
 
@@ -80,10 +82,18 @@ import { CheckForNewVersionComponent } from './_dialog/check-for-new-version/che
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    KeycloakAngularModule
 
 
   ],
-  providers: [DataService],
+  providers: [DataService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+  }],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

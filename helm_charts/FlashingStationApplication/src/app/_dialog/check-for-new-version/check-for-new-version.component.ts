@@ -49,7 +49,7 @@ export class CheckForNewVersionComponent implements OnInit {
       else{
         
         this.finished = true;
-        await this.sleep(5000);
+        await this.sleep(1000);
         this.close()
       }
       

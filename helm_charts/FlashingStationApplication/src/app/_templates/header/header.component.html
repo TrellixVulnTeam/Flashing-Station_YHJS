@@ -17,23 +17,18 @@
  
 
     <span class="spacer"></span>
-   
-    <button mat-icon-button id="flag-outline">
-        <mat-icon></mat-icon>
-    </button>
-    <mat-menu #langmenu>
-        <div>
-            <button mat-menu-item>Deutsch</button>
-        </div>
-    </mat-menu>
+
 
     <button mat-raised-button id="perm_identity" [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
-        Bautz, Daniel
+        {{ user }}
     </button>
     <mat-menu #menu>
-        <button mat-menu-item id="logout" (click)="logout()">
+        <button mat-menu-item id="logout" *ngIf="loggedIn" (click)="logout()" >
             Logout
+        </button>
+        <button mat-menu-item id="logout" *ngIf="!loggedIn" (click)="login()" routerLink="">
+            Login
         </button>
     </mat-menu>
 </mat-toolbar>
@@ -51,13 +46,18 @@
                             <span class="mat-h6">QIP Check</span>
                         </div>
                    </mat-grid-tile>
-                   <mat-grid-tile>
+                   <mat-grid-tile *ngIf="loggedIn">
                         <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center"(click)="setViewToFlash()">
                             <img class="placeholder" src="../../../assets/magik/icons/change-over.svg" />
                             <br>
                             <span class="mat-h6">Flash Device</span>
                     </div>
                    </mat-grid-tile>
+                   <mat-grid-tile *ngIf="!loggedIn">
+                    <div class="sidenavElement" fxLayout="column" fxLayoutAlign="center center">
+                        <span class="mat-h6">Login to Flash Device</span>
+                </div>
+               </mat-grid-tile>
                 </mat-grid-list>   
             </div>
             
@@ -72,7 +72,6 @@
                 <div class="height100">
                     <app-qipcheckview *ngIf="startView"></app-qipcheckview>
                     <app-flashingview *ngIf="!startView"></app-flashingview>
-                    <router-outlet></router-outlet>
                 </div>
             </div>
         </mat-drawer-content>

@@ -3,6 +3,7 @@ import express from 'express'
 import path from 'path'
 import bodyParser from 'body-parser'
 import mongo from 'mongoose'
+import cors from 'cors'
 
 //MongoDb Setup
 
@@ -14,15 +15,16 @@ import mongo from 'mongoose'
 
 //Use express as backend
 var app = express()
+app.use(cors())
 app.use(bodyParser());
 app.use(bodyParser.json({limit:'5mb'}));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(function(req,res,next){
-  //header access control origin needs to be ingress url from angular project
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type' );
+
   res.setHeader('Access-Control-Allow-Credentials',true);
   next();
 });
@@ -150,7 +152,8 @@ app.get('/api/checkDevicesInQip', async function (req, res) {
       console.log(data)
       var result = "";
       for (const device of data) {
-        var host = await dnsPromises.reverse(device.ipadress);
+        try{
+          var host = await dnsPromises.reverse(device.ipadress);
         if (host.toString() == device.hostname) {
           //result = result + {"hostname":device.hostname, "ipadress":device.ipadress, "message": "registered correctly"}
           result = result + "Device " + device.hostname + " has been registered correctly in QIP." + "\n"
@@ -161,6 +164,12 @@ app.get('/api/checkDevicesInQip', async function (req, res) {
           result = result + "Device " + device.hostname + " has NOT been registered correctly in QIP." + "\n"
           //JSON.stringify({ message: result })
         }
+        }
+        catch (err) {
+          result = result + "Device " + device.hostname + " has NOT been registered correctly in QIP." + "\n"
+          console.log("not found")
+        }
+        
       }
       res.send(JSON.stringify(JSON.stringify(result)))
     }

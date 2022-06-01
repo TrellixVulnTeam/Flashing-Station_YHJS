@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { DataService } from './_service/data.service';
 
 @Component({
